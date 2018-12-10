@@ -3,15 +3,11 @@ import ReactDOM from 'react-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import * as serviceWorker from './serviceWorker';
-
 import './index.scss';
 
-import App from './components/app';
+import CheckAccount from './components/checkAccount';
 
 ReactDOM.render(
-  <App />,
+  <CheckAccount />,
   document.getElementById('root'),
 );
-
-serviceWorker.unregister();
