@@ -6,6 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import Header from '../header';
 import Home from '../home';
 import DisplayCard from '../displayCard';
 
@@ -36,6 +37,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <Header />
           <Switch>
             <Route exact path="/" render={() => (<Home address={address} contract={contract} web3={web3} />)} />
             <Route exact path="/card/:cardId" render={props => (<DisplayCard {...props} address={address} contract={contract} web3={web3} />)} />
