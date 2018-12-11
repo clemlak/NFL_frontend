@@ -100,13 +100,29 @@ class DisplayCard extends Component {
     }
 
     return (
-      <p>Loading card...</p>
+      <ListGroup>
+        <ListGroupItem>
+          <div className="placeholder"></div>
+        </ListGroupItem>
+        <ListGroupItem>
+          <div className="placeholder"></div>
+        </ListGroupItem>
+        <ListGroupItem>
+          <div className="placeholder"></div>
+        </ListGroupItem>
+        <ListGroupItem>
+          <div className="placeholder"></div>
+        </ListGroupItem>
+        <ListGroupItem>
+          <div className="placeholder"></div>
+        </ListGroupItem>
+      </ListGroup>
     );
   }
 
   render = () => (
-    <Container>
-      <Row>
+    <Container fluid>
+      <Row className="py-3">
         <Col>
           <Card>
             <CardBody>
