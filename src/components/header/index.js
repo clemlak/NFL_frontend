@@ -11,6 +11,8 @@ import {
   NavItem,
 } from 'reactstrap';
 
+import Logo from '../../common/img/logos/nflcryptofootball_logo.png';
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -40,12 +42,32 @@ class Header extends Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">NFL Crypto Football</NavbarBrand>
+          <NavbarBrand className="d-block d-md-none">
+            <img src={Logo} alt="logo" className="header__logo" />
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav className="mx-auto align-items-center" navbar>
               <NavItem>
                 <NavLink exact to="/" className="nav-link" activeClassName="active">Home</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink exact to="/cards" className="nav-link" activeClassName="active">My cards</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink exact to="/marketplace" className="nav-link" activeClassName="active">Marketplace</NavLink>
+              </NavItem>
+              <NavbarBrand className="d-none d-md-block">
+                <img src={Logo} alt="logo" className="header__logo" />
+              </NavbarBrand>
+              <NavItem>
+                <NavLink exact to="/" className="nav-link" activeClassName="active">Home</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink exact to="/cards" className="nav-link" activeClassName="active">My cards</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink exact to="/marketplace" className="nav-link" activeClassName="active">Marketplace</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
