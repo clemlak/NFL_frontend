@@ -6,10 +6,10 @@ import {
   LocalAddress,
   Client,
 } from 'loom-js';
-
 import Cookies from 'universal-cookie';
-
 import ContractBuild from '../../common/contracts/NFL.json';
+
+import App from '../app';
 
 class CheckAccount extends Component {
   constructor(props) {
@@ -41,7 +41,6 @@ class CheckAccount extends Component {
     this.contract = new this.web3.eth.Contract(abi, contractAddress, { from: this.from });
 
     this.state = {
-      balance: 0,
       address: this.from,
     };
   }
@@ -52,11 +51,11 @@ class CheckAccount extends Component {
     } = this.state;
 
     return (
-      <div>
-        <h1>
-          {`Welcome ${address}!`}
-        </h1>
-      </div>
+      <App
+        address={address}
+        contract={this.contract}
+        web3={this.web3}
+      />
     );
   }
 }
