@@ -1,3 +1,16 @@
-
-
+@import "./variables.scss";
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+.placeholder {
+  padding: 12px;
+  background-color: #ced4da;
+  width: 100%;
+}
+
+.header__logo {
+  max-height: 100px;
+}
+
+.nav-link {
+
+}
