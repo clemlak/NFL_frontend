@@ -1,6 +1,22 @@
 @import "./variables.scss";
 @import "../node_modules/bootstrap/scss/bootstrap";
 
+@font-face {
+  font-family: 'Circular';
+  src: url(./common/fonts/Circular/CircularStd-Book.woff) format('woff');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url(./common/fonts/Circular/CircularStd-Black.woff) format('woff');
+  font-weight: bold;
+}
+
+body {
+  font-family: 'Circular';
+}
+
 .placeholder {
   padding: 12px;
   background-color: #ced4da;
@@ -11,16 +27,11 @@
   max-height: 100px;
 }
 
-.nav-link {
-
-}
-
 .footer {
   background-color: $main-color;
   color: #ffffff;
 }
 
-.footer .nav-link a,
-.footer .nav-link a:hover {
+.nav-link {
   color: #ffffff;
 }
