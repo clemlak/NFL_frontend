@@ -43,17 +43,12 @@ const Footer = () => (
       <Col>
         <Nav vertical>
           <NavItem>
-            <NavLink className="nav-link" to="/marketplace">
-              Team and careers
+            <NavLink className="nav-link" to="/team">
+              Team
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className="nav-link" to="/marketplace">
-              Developers
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink className="nav-link" to="/marketplace">
+            <NavLink className="nav-link" to="/faq">
               FAQ
             </NavLink>
           </NavItem>
@@ -62,17 +57,17 @@ const Footer = () => (
       <Col>
         <Nav vertical>
           <NavItem>
-            <NavLink className="nav-link" to="/marketplace">
+            <NavLink className="nav-link" to="/privacy">
               Privacy
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className="nav-link" to="/marketplace">
+            <NavLink className="nav-link" to="/terms">
               Terms of Use
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className="nav-link" to="/marketplace">
+            <NavLink className="nav-link" to="/contact">
               Contact us
             </NavLink>
           </NavItem>
