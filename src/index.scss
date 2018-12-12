@@ -14,3 +14,13 @@
 .nav-link {
 
 }
+
+.footer {
+  background-color: $main-color;
+  color: #ffffff;
+}
+
+.footer .nav-link a,
+.footer .nav-link a:hover {
+  color: #ffffff;
+}
