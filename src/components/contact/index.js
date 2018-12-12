@@ -5,15 +5,15 @@ import {
   Col,
 } from 'reactstrap';
 
-const Marketplace = () => (
+const Contact = () => (
   <Container>
     <Row>
       <Col>
-        <h1>Marketplace</h1>
-        <p>Buy and sell cards here</p>
+        <h1>Contact</h1>
+        <p>Write us!</p>
       </Col>
     </Row>
   </Container>
 );
 
-export default Marketplace;
+export default Contact;
