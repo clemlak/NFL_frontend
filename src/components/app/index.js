@@ -6,10 +6,17 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import Header from '../header';
-import Footer from '../footer';
-import Home from '../home';
+import About from '../about';
+import Contact from '../contact';
 import DisplayCard from '../displayCard';
+import Faq from '../faq';
+import Footer from '../footer';
+import Header from '../header';
+import Home from '../home';
+import Marketplace from '../marketplace';
+import Privacy from '../privacy';
+import Team from '../team';
+import Terms from '../terms';
 
 class App extends Component {
   constructor(props) {
@@ -41,6 +48,14 @@ class App extends Component {
           <Header />
           <Switch>
             <Route exact path="/" render={() => (<Home address={address} contract={contract} web3={web3} />)} />
+            <Route exact path="/about" render={About} />
+            <Route exact path="/contact" render={Contact} />
+            <Route exact path="/faq" render={Faq} />
+            <Route exact path="/marketplace" render={() => (<Marketplace address={address} contract={contract} web3={web3} />)} />
+            <Route exact path="/privacy" render={Privacy} />
+            <Route exact path="/team" render={Team} />
+            <Route exact path="/terms" render={Terms} />
+
             <Route exact path="/card/:cardId" render={props => (<DisplayCard {...props} address={address} contract={contract} web3={web3} />)} />
           </Switch>
           <Footer />
