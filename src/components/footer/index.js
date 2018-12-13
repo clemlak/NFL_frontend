@@ -29,8 +29,8 @@ const Footer = () => (
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className="nav-link" to="/cards">
-              My cards
+            <NavLink className="nav-link" to="/profile">
+              My profile
             </NavLink>
           </NavItem>
           <NavItem>

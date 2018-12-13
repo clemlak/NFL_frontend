@@ -67,6 +67,23 @@ class DisplayCard extends Component {
       });
   }
 
+  transferCard = () => {
+    const {
+      contract,
+      address,
+      recipient,
+      cardToTransfer,
+    } = this.state;
+
+    contract.methods.transferFrom(address, recipient, cardToTransfer).send()
+      .then((tx) => {
+        console.log(tx);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   displayCard = () => {
     const {
       cardId,

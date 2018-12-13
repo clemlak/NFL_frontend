@@ -52,7 +52,7 @@ class Header extends Component {
                 <NavLink exact to="/" className="nav-link" activeClassName="active">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink exact to="/cards" className="nav-link" activeClassName="active">My cards</NavLink>
+                <NavLink exact to="/profile" className="nav-link" activeClassName="active">My profile</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink exact to="/marketplace" className="nav-link" activeClassName="active">Marketplace</NavLink>
