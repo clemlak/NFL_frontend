@@ -49,7 +49,6 @@ class Admin extends Component {
       uri: '',
       recipient: '',
       txState: 'null',
-      hash: '',
     };
   }
 
