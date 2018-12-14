@@ -42,9 +42,9 @@ class Header extends Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand className="d-block d-md-none">
+          <NavLink to="/" className="d-block d-md-none navbar-brand">
             <img src={Logo} alt="logo" className="header__logo" />
-          </NavbarBrand>
+          </NavLink>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mx-auto align-items-center" navbar>
@@ -57,17 +57,17 @@ class Header extends Component {
               <NavItem>
                 <NavLink exact to="/marketplace" className="nav-link" activeClassName="active">Marketplace</NavLink>
               </NavItem>
-              <NavbarBrand className="d-none d-md-block">
+              <NavLink to="/" className="d-none d-md-block navbar-brand">
                 <img src={Logo} alt="logo" className="header__logo" />
-              </NavbarBrand>
+              </NavLink>
               <NavItem>
-                <NavLink exact to="/" className="nav-link" activeClassName="active">Home</NavLink>
+                <NavLink exact to="/faq" className="nav-link" activeClassName="active">FAQ</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink exact to="/cards" className="nav-link" activeClassName="active">My cards</NavLink>
+                <NavLink exact to="/about" className="nav-link" activeClassName="active">About</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink exact to="/marketplace" className="nav-link" activeClassName="active">Marketplace</NavLink>
+                <NavLink exact to="/team" className="nav-link" activeClassName="active">Team</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
