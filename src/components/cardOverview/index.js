@@ -4,16 +4,11 @@ import {
   NavLink,
 } from 'react-router-dom';
 import {
-  Row,
-  Col,
   Card,
   CardImg,
   CardBody,
-  CardHeader,
-  CardFooter,
   ListGroup,
   ListGroupItem,
-  Badge,
 } from 'reactstrap';
 
 import RarityBadge from '../rarityBadge';
@@ -27,21 +22,16 @@ class CardOverview extends Component {
     const {
       address,
       contract,
-      web3,
       cardId,
     } = this.props;
 
     this.state = {
       address,
       contract,
-      web3,
       cardId,
       name: '',
       teamId: 0,
       rarity: 0,
-      data: '',
-      createdAt: 0,
-      cardOwner: '',
       uri: ImgPlaceholder,
       isCardLoaded: false,
     };
@@ -54,7 +44,6 @@ class CardOverview extends Component {
   updateCard = () => {
     const {
       contract,
-      address,
       cardId,
     } = this.state;
 
@@ -64,11 +53,9 @@ class CardOverview extends Component {
           name: card[0],
           teamId: card[1],
           rarity: card[2],
-          data: card[3],
-          createdAt: card[4],
         });
 
-        return contract.methods.tokenURI(cardId).call()
+        return contract.methods.tokenURI(cardId).call();
       })
       .then((uri) => {
         this.setState({
@@ -100,17 +87,15 @@ class CardOverview extends Component {
 
   displayCard = () => {
     const {
-      cardId,
       name,
       teamId,
       rarity,
-      createdAt,
       isCardLoaded,
     } = this.state;
 
     if (isCardLoaded) {
       return (
-        <div className="text-center">
+        <div className="text-center card__text">
           <p className="lead mb-0">
             {name}
             {' '}
@@ -128,19 +113,19 @@ class CardOverview extends Component {
     return (
       <ListGroup>
         <ListGroupItem>
-          <div className="placeholder"></div>
+          <div className="placeholder" />
         </ListGroupItem>
         <ListGroupItem>
-          <div className="placeholder"></div>
+          <div className="placeholder" />
         </ListGroupItem>
         <ListGroupItem>
-          <div className="placeholder"></div>
+          <div className="placeholder" />
         </ListGroupItem>
         <ListGroupItem>
-          <div className="placeholder"></div>
+          <div className="placeholder" />
         </ListGroupItem>
         <ListGroupItem>
-          <div className="placeholder"></div>
+          <div className="placeholder" />
         </ListGroupItem>
       </ListGroup>
     );
