@@ -116,15 +116,11 @@ class CardOverview extends Component {
             {' '}
             <RarityBadge rarity={rarity} />
           </p>
-          <p>
+          <p className="mb-0">
             <small>
               {teamId}
             </small>
           </p>
-
-          <NavLink to={`/card/${cardId}`} className="btn btn-primary">
-            More info
-          </NavLink>
         </div>
       );
     }
@@ -153,15 +149,18 @@ class CardOverview extends Component {
   render = () => {
     const {
       uri,
+      cardId,
     } = this.state;
 
     return (
-      <Card>
-        <CardImg top width="100%" src={uri} alt="Card image cap" />
-        <CardBody>
-          {this.displayCard()}
-        </CardBody>
-      </Card>
+      <NavLink to={`/card/${cardId}`}>
+        <Card>
+          <CardImg top width="100%" src={uri} alt="Card image cap" />
+          <CardBody>
+            {this.displayCard()}
+          </CardBody>
+        </Card>
+      </NavLink>
     );
   }
 }
