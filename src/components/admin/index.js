@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import IPFS from 'ipfs-http-client';
 import {
   Container,
   Row,
@@ -25,6 +26,12 @@ class Admin extends Component {
   constructor(props) {
     super(props);
 
+    this.ipfs = IPFS({
+      host: 'ipfs.infura.io',
+      port: 5001,
+      protocol: 'https',
+    });
+
     const {
       address,
       contract,
@@ -38,10 +45,11 @@ class Admin extends Component {
       name: '',
       teamId: '',
       rarity: 0,
-      data: '',
+      bio: '',
       uri: '',
       recipient: '',
       txState: 'null',
+      hash: '',
     };
   }
 
@@ -50,14 +58,14 @@ class Admin extends Component {
       this.setState({ name: e.target.value });
     } else if (e.target.name === 'teamIdInput') {
       this.setState({ teamId: e.target.value });
-    } else if (e.target.name === 'dataInput') {
-      this.setState({ data: e.target.value });
     } else if (e.target.name === 'uriInput') {
       this.setState({ uri: e.target.value });
     } else if (e.target.name === 'recipientInput') {
       this.setState({ recipient: e.target.value });
     } else if (e.target.name === 'rarityInput') {
       this.setState({ rarity: e.target.value });
+    } else if (e.target.name === 'bioInput') {
+      this.setState({ bio: e.target.value });
     }
   }
 
@@ -67,35 +75,50 @@ class Admin extends Component {
       name,
       teamId,
       rarity,
-      data,
+      bio,
       uri,
       recipient,
     } = this.state;
 
     e.preventDefault();
 
-    contract.methods.createCard(
-      name,
-      teamId,
-      rarity,
-      data,
-      uri,
-      recipient,
-    ).send()
-      .on('transactionHash', () => {
-        this.setState({
-          txState: 'pending',
-        });
+    const data = {
+      bio,
+    };
+
+    this.setState({
+      txState: 'pending',
+    });
+
+    this.ipfs.add(Buffer.from(JSON.stringify(data)))
+      .then((res) => {
+        const { hash } = res[0];
+        console.log(hash);
+
+        contract.methods.createCard(
+          name,
+          teamId,
+          rarity,
+          hash,
+          uri,
+          recipient,
+        ).send()
+          .on('transactionHash', (txHash) => {
+            console.log(txHash);
+          })
+          .on('receipt', () => {
+            this.setState({
+              txState: 'success',
+            });
+          })
+          .on('error', () => {
+            this.setState({
+              txState: 'error',
+            });
+          });
       })
-      .on('receipt', () => {
-        this.setState({
-          txState: 'success',
-        });
-      })
-      .on('error', () => {
-        this.setState({
-          txState: 'error',
-        });
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -146,7 +169,7 @@ class Admin extends Component {
       name,
       teamId,
       rarity,
-      data,
+      bio,
       uri,
       recipient,
       txState,
@@ -162,34 +185,48 @@ class Admin extends Component {
               </CardHeader>
               <CardBody>
                 <Form>
-                  <FormGroup>
-                    <Label for="nameInput">Name</Label>
-                    <Input type="text" name="nameInput" id="nameInput" placeholder="John Doe" value={name} onChange={this.handleChange} />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="teamIdInput">Team</Label>
-                    <Input type="text" name="teamIdInput" id="teamIdInput" placeholder="42" value={teamId} onChange={this.handleChange} />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="dataInput">Additional data</Label>
-                    <Input type="text" name="dataInput" id="dataInput" placeholder="QmRAQB6YaCyidP37UdDnjFY5vQuiBrcqdyoW1CuDgwxkD4" value={data} onChange={this.handleChange} />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="uriInput">Token URI</Label>
-                    <Input type="text" name="uriInput" id="uriInput" placeholder="https://token.com/tokenId" value={uri} onChange={this.handleChange} />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="recipientInput">Recipient</Label>
-                    <Input type="text" name="recipientInput" id="recipientInput" placeholder="0x2d79097b9E4c4f41654B2C91C39FD2c97Af00c76" value={recipient} onChange={this.handleChange} />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="rarityInput">Rarity</Label>
-                    <Input type="select" name="rarityInput" id="rarityInput" onChange={this.handleChange} value={rarity}>
-                      <option value="0">Common</option>
-                      <option value="1">Rare</option>
-                      <option value="2">Epic</option>
-                    </Input>
-                  </FormGroup>
+                  <Row>
+                    <Col>
+                      <FormGroup>
+                        <Label for="nameInput">Name</Label>
+                        <Input type="text" name="nameInput" id="nameInput" placeholder="John Doe" value={name} onChange={this.handleChange} />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="teamIdInput">Team</Label>
+                        <Input type="text" name="teamIdInput" id="teamIdInput" placeholder="42" value={teamId} onChange={this.handleChange} />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="uriInput">Token URI</Label>
+                        <Input type="text" name="uriInput" id="uriInput" placeholder="https://token.com/tokenId" value={uri} onChange={this.handleChange} />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="recipientInput">Recipient</Label>
+                        <Input type="text" name="recipientInput" id="recipientInput" placeholder="0x2d79097b9E4c4f41654B2C91C39FD2c97Af00c76" value={recipient} onChange={this.handleChange} />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="rarityInput">Rarity</Label>
+                        <Input type="select" name="rarityInput" id="rarityInput" onChange={this.handleChange} value={rarity}>
+                          <option value="0">Common</option>
+                          <option value="1">Rare</option>
+                          <option value="2">Epic</option>
+                        </Input>
+                      </FormGroup>
+                    </Col>
+                    <Col>
+                      <FormGroup>
+                        <Label for="bioInput">Bio</Label>
+                        <Input
+                          type="textarea"
+                          name="bioInput"
+                          id="bioInput"
+                          value={bio}
+                          onChange={this.handleChange}
+                          placeholder="At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti."
+                          rows="4"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
                 </Form>
               </CardBody>
               <CardFooter>
