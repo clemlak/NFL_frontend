@@ -73,6 +73,8 @@ class Profile extends Component {
         .then((tokenId) => {
           tokens.push(tokenId);
 
+          console.log('Token id', tokenId);
+
           this.setState({
             tokens,
           });
@@ -106,7 +108,13 @@ class Profile extends Component {
 
     for (let i = 0; i < tokens.length; i += 1) {
       cards.push(
-        <CardOverview key={i} address={address} contract={contract} web3={web3} cardId={i} />,
+        <CardOverview
+          key={i}
+          address={address}
+          contract={contract}
+          web3={web3}
+          cardId={tokens[i]}
+        />,
       );
     }
 
