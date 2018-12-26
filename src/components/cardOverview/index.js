@@ -154,7 +154,7 @@ CardOverview.propTypes = {
   address: PropTypes.string.isRequired,
   contract: PropTypes.any.isRequired,
   web3: PropTypes.any.isRequired,
-  cardId: PropTypes.number.isRequired,
+  cardId: PropTypes.string.isRequired,
 };
 
 export default CardOverview;
