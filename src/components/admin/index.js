@@ -46,6 +46,9 @@ class Admin extends Component {
       teamId: '',
       rarity: 0,
       bio: '',
+      height: 0,
+      weight: 0,
+      power: 0,
       uri: '',
       recipient: '',
       txState: 'null',
@@ -65,6 +68,12 @@ class Admin extends Component {
       this.setState({ rarity: e.target.value });
     } else if (e.target.name === 'bioInput') {
       this.setState({ bio: e.target.value });
+    } else if (e.target.name === 'heightInput') {
+      this.setState({ height: e.target.value });
+    } else if (e.target.name === 'weightInput') {
+      this.setState({ weight: e.target.value });
+    } else if (e.target.name === 'powerInput') {
+      this.setState({ power: e.target.value });
     }
   }
 
@@ -75,6 +84,9 @@ class Admin extends Component {
       teamId,
       rarity,
       bio,
+      height,
+      weight,
+      power,
       uri,
       recipient,
     } = this.state;
@@ -83,6 +95,9 @@ class Admin extends Component {
 
     const data = {
       bio,
+      height,
+      weight,
+      power,
     };
 
     this.setState({
@@ -169,6 +184,9 @@ class Admin extends Component {
       teamId,
       rarity,
       bio,
+      weight,
+      height,
+      power,
       uri,
       recipient,
       txState,
@@ -212,6 +230,18 @@ class Admin extends Component {
                       </FormGroup>
                     </Col>
                     <Col>
+                      <FormGroup>
+                        <Label for="weightInput">Weight</Label>
+                        <Input type="text" name="weightInput" id="weightInput" placeholder="42" value={weight} onChange={this.handleChange} />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="heightInput">Height</Label>
+                        <Input type="text" name="heightInput" id="heightInput" placeholder="6" value={height} onChange={this.handleChange} />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="powerInput">Power</Label>
+                        <Input type="text" name="powerInput" id="powerInput" placeholder="36" value={power} onChange={this.handleChange} />
+                      </FormGroup>
                       <FormGroup>
                         <Label for="bioInput">Bio</Label>
                         <Input
